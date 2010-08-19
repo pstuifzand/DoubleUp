@@ -1,0 +1,13 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use 5.010;
+
+use lib 'lib';
+
+use App::DoubleUp;
+
+my $app = App::DoubleUp->new;
+$app->process_args(@ARGV);
+$app->run;
+
