@@ -43,9 +43,6 @@ sub process_files {
 
     return @querys;
 }
-
-# I need a database connection to use this...
-
 sub db_prepare {
     my ($db, $query) = @_;
     my $stmt = $db->prepare($query);
@@ -152,3 +149,9 @@ sub usage {
 }
 
 1;
+
+=head1 NAME
+
+App::DoubleApp - Import SQL files into MySQL
+
+=cut
