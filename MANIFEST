@@ -5,4 +5,5 @@ README
 lib/App/DoubleUp.pm
 bin/doubleup
 t/01_creation.t
+t/doubleuprc
 META.yml

@@ -4,5 +4,5 @@ use Test::More tests => 1;
 
 use App::DoubleUp;
 
-my $app = App::DoubleUp->new();
+my $app = App::DoubleUp->new({ config_file => 't/doubleuprc' });
 ok($app);
