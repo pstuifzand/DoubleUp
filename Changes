@@ -1,3 +1,7 @@
-2010-08-19 Peter Stuifzand <peter.stuifzand@gmail.com>
+2010-08-23  Peter Stuifzand <peter@stuifzand.eu>
+
+	* Added config_file option
+
+2010-08-19  Peter Stuifzand <peter@stuifzand.eu>
 	
 	* First version
