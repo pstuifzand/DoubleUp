@@ -1,5 +1,5 @@
 package App::DoubleUp;
-our $VERSION = '0.2.2';
+our $VERSION = '0.2.4';
 
 use strict;
 use warnings;
@@ -7,6 +7,8 @@ use 5.010;
 
 use DBI;
 use YAML;
+use File::Slurp;
+use SQL::SplitStatement;
 
 local $|=1;
 
@@ -39,19 +41,17 @@ sub process_files {
     local $/ = ";\n";
 
     for my $filename (@$files) {
-        open my $in, '<', $filename or die "Can't open $filename";
-
-        while (<$in>) {
-            next if m/^\s*$/;
-            chomp;
-
-            my $query = $_;
-            push @querys, $query;
-        }
+        push @querys, $self->split_sql_file($filename);
     }
 
     return @querys;
 }
+sub split_sql_file {
+    my ($self, $filename) = @_;
+    my $splitter = SQL::SplitStatement->new();
+    return $splitter->split(scalar read_file($filename));
+}
+
 sub db_prepare {
     my ($db, $query) = @_;
     my $stmt = $db->prepare($query);

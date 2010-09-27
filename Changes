@@ -1,6 +1,7 @@
 2010-09-27  Peter Stuifzand <peter@stuifzand.eu>
 
 	* Added YAML dependency in Build.PL
+	* Use SQL::SplitStatement as the sql file split function
 
 2010-08-23  Peter Stuifzand <peter@stuifzand.eu>
 
