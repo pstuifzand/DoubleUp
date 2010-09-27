@@ -1,3 +1,7 @@
+2010-09-27  Peter Stuifzand <peter@stuifzand.eu>
+
+	* Added YAML dependency in Build.PL
+
 2010-08-23  Peter Stuifzand <peter@stuifzand.eu>
 
 	* Added config_file option
