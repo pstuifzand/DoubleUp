@@ -30,7 +30,8 @@ sub process_args {
     my ($self, @args) = @_;
     $self->{command} = shift @args;
     if ($self->{command} eq 'import1') {
-        $self->{db} = shift @args;
+        $self->{db} = [shift @args];
+        $self->{command} = 'import';
     }
     $self->{files} = \@args;
     return;
@@ -114,8 +115,19 @@ sub process_one_query {
 }
 
 sub command {
-    my $self=shift;
+    my $self = shift;
     return $self->{command};
+}
+
+sub database_names {
+    my $self = shift;
+    $self->{db} //= [ $self->list_of_schemata ];
+    return $self->{db};
+}
+
+sub files {
+    my $self = shift;
+    return $self->{files};
 }
 
 sub run {
@@ -129,25 +141,15 @@ sub run {
             }
         }
         when ('import') {
-            my @querys = $self->process_files($self->{files});
+            my @querys = $self->process_files($self->files);
 
-            for my $schema ($self->list_of_schemata) {
+            for my $schema (@{ $self->database_names }) {
                 my $dsn = 'dbi:mysql:'.$schema;
                 say "DB: " . $schema;
                 my $db = $self->connect_to_db($dsn, $self->credentials);
                 $self->process_querys_for_one_db($db, \@querys);
                 say '';
             }
-        }
-        when ('import1') {
-            my @querys = $self->process_files($self->{files});
-            my $schema = $self->{db};
-
-            my $dsn = 'dbi:mysql:'.$schema;
-            say "DB: " . $schema;
-            my $db = $self->connect_to_db($dsn, $self->credentials);
-            $self->process_querys_for_one_db($db, \@querys);
-            say '';
         }
         when (undef) {
             $self->usage;
