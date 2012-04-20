@@ -108,7 +108,7 @@ sub list_of_schemata {
     }
     elsif ($source->{type} eq 'database') {
         my $db = $self->connect_to_db('dbi:mysql:information_schema', $self->credentials);
-        return db_flatarray($db, $self->{config}{schemata_sql});
+        return db_flatarray($db, $source->{schemata_sql});
     }
 }
 
