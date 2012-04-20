@@ -9,6 +9,7 @@ use DBI;
 use YAML;
 use File::Slurp;
 use SQL::SplitStatement;
+use File::Spec::Functions 'catfile';
 
 local $|=1;
 
@@ -18,7 +19,13 @@ sub new {
     my $self = bless {}, $klass;
 
     if (!$args->{config_file}) {
-        $args->{config_file} = $ENV{HOME} . '/.doubleuprc';
+        for ('.', $ENV{HOME}) {
+            my $filename = catfile($_, '.doubleuprc');
+            if (-e $filename) {
+                $args->{config_file} = $filename;
+                last;
+            }
+        }
     }
     $self->{config_file} = $args->{config_file};
 
@@ -37,6 +44,11 @@ sub load_config {
     return YAML::LoadFile($filename);
 }
 
+sub source {
+    my ($self) = @_;
+    return $self->{config}{source};
+}
+
 sub process_args {
     my ($self, @args) = @_;
 
@@ -46,7 +58,9 @@ sub process_args {
         $self->{db} = [shift @args];
         $self->{command} = 'import';
     }
+
     $self->{files} = \@args;
+
     return;
 }
 
@@ -88,8 +102,14 @@ sub db_flatarray {
 
 sub list_of_schemata {
     my ($self) = @_;
-    my $db = $self->connect_to_db('dbi:mysql:information_schema', $self->credentials);
-    return db_flatarray($db, $self->{config}{schemata_sql});
+    my $source = $self->source;
+    if ($source->{type} eq 'config') {
+        return @{ $source->{databases} };
+    }
+    elsif ($source->{type} eq 'database') {
+        my $db = $self->connect_to_db('dbi:mysql:information_schema', $self->credentials);
+        return db_flatarray($db, $self->{config}{schemata_sql});
+    }
 }
 
 sub credentials {
