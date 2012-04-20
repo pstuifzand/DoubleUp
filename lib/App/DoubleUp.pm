@@ -20,15 +20,28 @@ sub new {
     if (!$args->{config_file}) {
         $args->{config_file} = $ENV{HOME} . '/.doubleuprc';
     }
+    $self->{config_file} = $args->{config_file};
 
-    $self->{config} = YAML::LoadFile($args->{config_file});
+    $self->{config} = $self->load_config($self->config_file);
 
     return $self; 
 }
 
+sub config_file {
+    my $self = shift;
+    return $self->{config_file};
+}
+
+sub load_config {
+    my ($self, $filename) = @_;
+    return YAML::LoadFile($filename);
+}
+
 sub process_args {
     my ($self, @args) = @_;
+
     $self->{command} = shift @args;
+
     if ($self->{command} eq 'import1') {
         $self->{db} = [shift @args];
         $self->{command} = 'import';
