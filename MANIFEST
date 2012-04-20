@@ -10,3 +10,4 @@ t/02_split.t
 t/doubleuprc
 META.yml
 test.sql
+META.json

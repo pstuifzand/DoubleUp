@@ -29,6 +29,9 @@ sub new {
 sub process_args {
     my ($self, @args) = @_;
     $self->{command} = shift @args;
+    if ($self->{command} eq 'import1') {
+        $self->{db} = shift @args;
+    }
     $self->{files} = \@args;
     return;
 }
@@ -136,6 +139,16 @@ sub run {
                 say '';
             }
         }
+        when ('import1') {
+            my @querys = $self->process_files($self->{files});
+            my $schema = $self->{db};
+
+            my $dsn = 'dbi:mysql:'.$schema;
+            say "DB: " . $schema;
+            my $db = $self->connect_to_db($dsn, $self->credentials);
+            $self->process_querys_for_one_db($db, \@querys);
+            say '';
+        }
         when (undef) {
             $self->usage;
         }
@@ -152,8 +165,9 @@ sub usage {
     say "";
     say "List of commands";
     say "";
-    say "  listdb               list of schemata";
-    say "  import [filename]    import a file into each db";
+    say "  listdb                   list of schemata";
+    say "  import [filename]        import a file into each db";
+    say "  import1 [db] [filename]  import a file into one db";
     say "";
 }
 
