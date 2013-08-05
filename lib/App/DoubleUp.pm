@@ -181,7 +181,7 @@ sub run {
 
             for my $schema (@{ $self->database_names }) {
                 my $dsn = 'dbi:mysql:'.$schema;
-                say "DB: " . $schema;
+                say "DB: $schema";
                 my $db = $self->connect_to_db($dsn, $self->credentials);
                 $self->process_querys_for_one_db($db, \@querys);
                 say '';
