@@ -212,6 +212,18 @@ sub usage {
 
 App::DoubleApp - Import SQL files into MySQL
 
+=head1 SYNOPSYS
+
+    $ doubleup listdb
+    ww_test1
+    ww_test2
+    ww_test3
+    ww_test4
+    $ doubleup import1 ww_test db/01_base.sql
+    .
+    $ doubleup import db/02_upgrade.sql
+    ....
+
 =head1 AUTHOR
 
 Peter Stuifzand E<lt>peter@stuifzand.euE<gt>
