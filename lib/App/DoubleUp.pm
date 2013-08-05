@@ -5,6 +5,8 @@ our $VERSION = '0.4.1';
 
 use 5.010;
 
+
+use Carp;
 use DBI;
 use YAML;
 use File::Slurp;
@@ -119,7 +121,7 @@ sub credentials {
 
 sub connect_to_db {
     my ($self, $dsn, $user, $password) = @_;
-    return DBI->connect($dsn, $user, $password, { RaiseError => 1, PrintError => 0 }) or die "Can't $dsn";
+    return DBI->connect($dsn, $user, $password, { RaiseError => 1, PrintError => 0 }) || croak "Error while connecting to '$dsn'";
 }
 
 sub process_querys_for_one_db {
