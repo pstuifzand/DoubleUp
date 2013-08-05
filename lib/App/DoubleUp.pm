@@ -1,5 +1,5 @@
 package App::DoubleUp;
-our $VERSION = '0.4.0';
+our $VERSION = '0.4.1';
 
 use strict;
 use warnings;
