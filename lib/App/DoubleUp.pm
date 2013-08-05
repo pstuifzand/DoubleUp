@@ -12,8 +12,7 @@ use YAML;
 use File::Slurp;
 use SQL::SplitStatement;
 use File::Spec::Functions 'catfile';
-
-local $|=1;
+use IO::Handle;
 
 sub new {
     my ($klass, $args) = @_;
@@ -168,6 +167,8 @@ sub files {
 
 sub run {
     my ($self) = @_;
+
+    STDOUT->autoflush(1);
 
     given ($self->command) {
         when ('listdb') {
