@@ -171,6 +171,9 @@ sub run {
     STDOUT->autoflush(1);
 
     given ($self->command) {
+        when ('version') {
+            say "doubleup version $VERSION";
+        }
         when ('listdb') {
             my @db = $self->list_of_schemata();
             for (@db) {
@@ -208,6 +211,7 @@ sub usage {
     say "  listdb                   list of schemata";
     say "  import [filename]        import a file into each db";
     say "  import1 [db] [filename]  import a file into one db";
+    say "  version                  show version";
     say "";
     return;
 }
