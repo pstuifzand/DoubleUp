@@ -1,8 +1,8 @@
 package App::DoubleUp;
-our $VERSION = '0.4.1';
-
 use strict;
 use warnings;
+our $VERSION = '0.4.1';
+
 use 5.010;
 
 use DBI;
