@@ -1,0 +1,7 @@
+/App-DoubleUp-*
+/.build
+/_build*
+/Build
+MYMETA.*
+!META.json
+config.yml
