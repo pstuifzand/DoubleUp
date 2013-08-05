@@ -135,6 +135,7 @@ sub process_querys_for_one_db {
             print '!';
         }
     }
+    return;
 }
 
 sub process_one_query {
@@ -194,6 +195,7 @@ sub run {
             $self->usage;
         }
     }
+    return;
 
 }
 sub usage {
@@ -206,6 +208,7 @@ sub usage {
     say "  import [filename]        import a file into each db";
     say "  import1 [db] [filename]  import a file into one db";
     say "";
+    return;
 }
 
 1;
