@@ -7,4 +7,5 @@ requires 'File::Spec::Functions';
 
 on 'test' => sub {
     requires 'Path::Tiny';
+    requires 'IO::Capture::Stdout';
 };
