@@ -217,7 +217,7 @@ sub usage {
 
 App::DoubleApp - Import SQL files into MySQL
 
-=head1 SYNOPSYS
+=head1 SYNOPSIS
 
     $ doubleup listdb
     ww_test1
@@ -228,6 +228,10 @@ App::DoubleApp - Import SQL files into MySQL
     .
     $ doubleup import db/02_upgrade.sql
     ....
+
+=head1 DESCRIPTION
+
+Import SQL files into a DBI compatible database.
 
 =head1 AUTHOR
 
