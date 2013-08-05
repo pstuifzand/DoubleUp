@@ -1,12 +1,14 @@
-2010-09-27  Peter Stuifzand <peter@stuifzand.eu>
+Changes for App-Doubleup
+ 
+{{$NEXT}
+		- Add dependency on File::Slurp
 
-	* Added YAML dependency in Build.PL
-	* Use SQL::SplitStatement as the sql file split function
+0.4.0 2010-09-27 CEST
+		- Added YAML dependency in Build.PL
+		- Use SQL::SplitStatement as the sql file split function
 
-2010-08-23  Peter Stuifzand <peter@stuifzand.eu>
+0.3.0 2010-08-23 CEST
+		- Added config_file option
 
-	* Added config_file option
-
-2010-08-19  Peter Stuifzand <peter@stuifzand.eu>
-	
-	* First version
+0.2.0 2010-08-19 CEST
+		- First version
