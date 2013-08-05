@@ -45,6 +45,7 @@
       },
       "test" : {
          "requires" : {
+            "IO::Capture::Stdout" : "0",
             "Path::Tiny" : "0"
          }
       }
@@ -61,7 +62,7 @@
          "web" : "https://github.com/pstuifzand/DoubleUp"
       }
    },
-   "version" : "0.4.1",
+   "version" : "0.4.2",
    "x_contributors" : [
       "Peter Stuifzand <peter.stuifzand@gmail.com>"
    ]
